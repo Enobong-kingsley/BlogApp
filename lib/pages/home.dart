@@ -85,22 +85,23 @@ class _HomeState extends State<Home> {
   Scaffold buildAuthScreen() {
     return Scaffold(
       body: PageView(
-        children: <Widget> [
+         controller: pageController,
+        onPageChanged: onPageChanged,
+        physics:const NeverScrollableScrollPhysics(),
+        children: <Widget>  [
           Timeline(),
           ActivityFeed(),
           Upload(),
           Search(),
           Profile(),
         ],
-        controller: pageController,
-        onPageChanged: onPageChanged,
-        physics: NeverScrollableScrollPhysics(),
+       
       ),
       bottomNavigationBar: CupertinoTabBar(
         currentIndex: pageIndex,
         onTap: onTap,
         activeColor: Theme.of(context).primaryColor,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.whatshot)
           ),
