@@ -7,7 +7,7 @@ AppBar header(context, {bool isAppTitle = false, String titleText}) {
       style: TextStyle(
         color: Colors.white,
         fontFamily: isAppTitle ? "Signatra" : '',
-        fontSize: isAppTitle ? 50.0 : 22.0
+        fontSize: isAppTitle ? 45.0 : 22.0
       ),
     ),
     centerTitle: true,
