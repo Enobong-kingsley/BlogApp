@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
+           const Text(
               'Blog App',
               style: TextStyle(
                 fontFamily: "Signatra",
@@ -39,12 +39,15 @@ class _HomeState extends State<Home> {
                 color: Colors.white,
               ),
             ),
+            const SizedBox(
+              height: 26,
+            ),
             GestureDetector(
               onTap: () => print('tapped'),
               child: Container(
                 width: 260.0,
                 height: 60.0,
-                decoration: BoxDecoration(
+                decoration:const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
                       'assets/images/google_signin_button.png',
