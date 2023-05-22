@@ -1,5 +1,6 @@
 import 'package:blogapp/pages/home.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp( MyApp());
@@ -8,7 +9,15 @@ void main() {
 class MyApp extends StatelessWidget {
  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot){
+         if (snapshot.hasError) {
+          return Text('Something went wrong');
+        }
+         // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return  MaterialApp(
       title: 'Blog App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -17,6 +26,12 @@ class MyApp extends StatelessWidget {
       ),
       home: Home(),
     );
+        }
+         // Otherwise, show something whilst waiting for initialization to complete
+        return CircularProgressIndicator();
+      }
+    );
+   
   }
 }
 
