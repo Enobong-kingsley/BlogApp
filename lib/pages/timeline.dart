@@ -17,11 +17,6 @@ class _TimelineState extends State<Timeline> {
   List <dynamic> users = [];
   @override
   void initState() {
-    // TODO: implement initState
-    //getUsersById();
-    //getUsers();
-    //createUser();
-    //updateUser();
     deleteUser();
     super.initState();
   }
