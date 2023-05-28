@@ -1,13 +1,19 @@
+import 'package:blogapp/models/user.dart';
 import 'package:blogapp/pages/activity_feed.dart';
+import 'package:blogapp/pages/create_account.dart';
 import 'package:blogapp/pages/profile.dart';
 import 'package:blogapp/pages/search.dart';
 import 'package:blogapp/pages/timeline.dart';
 import 'package:blogapp/pages/upload.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
+final usersRef = FirebaseFirestore.instance.collection('users');
+final timestamp = DateTime.now();
+User currentUser;
 
 class Home extends StatefulWidget {
   @override
@@ -42,7 +48,7 @@ class _HomeState extends State<Home> {
 
   handleSignIn(GoogleSignInAccount account){
      if(account != null){
-        print('User signed in : $account');
+       createUserInFireStore();
         setState(() {
           isAuth = true;
         });
@@ -51,6 +57,36 @@ class _HomeState extends State<Home> {
           isAuth = false;
         });
       }
+  }
+
+  createUserInFireStore() async{
+    // 1: check if users exists in users collection in database (according to their id)
+
+    final GoogleSignInAccount user = googleSignIn.currentUser;
+     DocumentSnapshot doc = await usersRef.doc(user.id).get();
+    
+    if(!doc.exists){
+      // 2: if the user doesnt exist, then we want to take them to the create account pgage to setup their profile.
+      final username = await Navigator.push(context, MaterialPageRoute(builder: (context) 
+      => CreateAccount()));
+
+      // 3: get username from create account and use it to make new user document in users collection.
+      usersRef.doc(user.id).set({
+        "id" : user.id,
+        "username": username,
+        "photoUrl" : user.photoUrl,
+        "email" : user.email,
+        "displayName" : user.displayName,
+        "bio" : "",
+        "timestamp" : timestamp
+      });
+      doc = await usersRef.doc(user.id).get();
+    }
+
+    currentUser = User.fromDocument(doc); 
+    print("::::${currentUser}::::::");
+    print(currentUser.username);
+
   }
 
    @override
@@ -91,7 +127,10 @@ class _HomeState extends State<Home> {
         onPageChanged: onPageChanged,
         physics:const NeverScrollableScrollPhysics(),
         children: <Widget>  [
-          Timeline(),
+          //Timeline(),
+          ElevatedButton(
+      onPressed: logout, 
+    child: Text('Logout')), 
           ActivityFeed(),
           Upload(),
           Search(),
