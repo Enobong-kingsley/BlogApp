@@ -40,11 +40,11 @@ dependencies:
   permission_handler: ^10.2.0
   uuid: ^2.0.0
   image: ^2.0.7
-  animator: 0.1.4
+  animator: ^3.3.0
   cupertino_icons: ^0.1.2
   path_provider: ^2.0.15
   firebase_messaging: ^14.6.1
-  timeago: 2.0.17
+  timeago: ^2.0.17
   cached_network_image:
   flutter_svg:
   
