@@ -1,10 +1,25 @@
 import 'package:blogapp/pages/home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+
 void main() {
+
+   //enableTimestampsInSnapshots();
+
   runApp( MyApp());
 }
+// void enableTimestampsInSnapshots() async {
+//    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+//   try {
+//     await firestore.enablePersistence();
+//     print("Timestamps enabled in snapshots\n");
+//   } catch (error) {
+//     print("Error enabling timestamps in snapshots: $error\n");
+//   }
+// }
 
 class MyApp extends StatelessWidget {
  @override
