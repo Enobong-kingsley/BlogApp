@@ -12,7 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
-import 'package:permission_handler/permission_handler.dart';
+//import 'package:permission_handler/permission_handler.dart';
 
 class Upload extends StatefulWidget {
   final User currentUser;
@@ -44,16 +44,16 @@ class _UploadState extends State<Upload> {
   }
 
   handleChooseFromGallery() async {
-    PermissionStatus status = await Permission.storage.request();
+   // PermissionStatus status = await Permission.storage.request();
     Navigator.pop(context);
-    if(status.isGranted){
+    //if(status.isGranted){
       File file = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       this.file = file;
     });
-    }else{
+   // }else{
       print(":::::::::::::::file: $file ::::::::::::::::");
-    }
+    // }
     
   }
 
