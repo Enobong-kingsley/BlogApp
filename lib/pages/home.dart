@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -145,28 +146,41 @@ class _HomeState extends State<Home> {
         ],
        
       ),
-      bottomNavigationBar: CupertinoTabBar(
-        currentIndex: pageIndex,
-        onTap: onTap,
-        activeColor: Theme.of(context).primaryColor,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.whatshot)
-          ),
-           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_active)
-          ),
-           BottomNavigationBarItem(
-            icon: Icon(Icons.photo_camera, size: 35.0,)
-          ),
-           BottomNavigationBarItem(
-            icon: Icon(Icons.search)
-          ),
-           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle)
-          ),
-        ],
-      ),
+      bottomNavigationBar: CurvedNavigationBar(
+  index: pageIndex,
+  height: 60.0,
+  backgroundColor: Colors.purple,
+  color: Theme.of(context).primaryColor,
+  buttonBackgroundColor: Theme.of(context).primaryColor,
+  items: const <Widget>[
+    Icon(Icons.whatshot, size: 30, color: Colors.white,),
+    Icon(Icons.notifications_active, size: 30,color: Colors.white,),
+    Icon(Icons.photo_camera, size: 30,color: Colors.white,),
+    Icon(Icons.search, size: 30,color: Colors.white,),
+    Icon(Icons.account_circle, size: 30,color: Colors.white,),
+      // CupertinoTabBar(
+      //   currentIndex: pageIndex,
+      //   onTap: onTap,
+      //   activeColor: Theme.of(context).primaryColor,
+      //   items: const [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.whatshot)
+      //     ),
+      //      BottomNavigationBarItem(
+      //       icon: Icon(Icons.notifications_active)
+      //     ),
+      //      BottomNavigationBarItem(
+      //       icon: Icon(Icons.photo_camera, size: 35.0,)
+      //     ),
+      //      BottomNavigationBarItem(
+      //       icon: Icon(Icons.search)
+      //     ),
+      //      BottomNavigationBarItem(
+      //       icon: Icon(Icons.account_circle)
+      //     ),
+       ],
+       onTap: onTap,
+       ),
     );
     // return ElevatedButton(
     //   onPressed: logout, 
